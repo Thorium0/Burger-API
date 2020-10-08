@@ -1,0 +1,28 @@
+{% extends "main/base.html.django" %}
+{% block content %}
+{% load crispy_forms_tags %}
+  <div class="content-section">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">{{topTitle}}</legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">{{btnName}}</button>
+        <button class="btn btn-outline-info" type="button" onclick="window.location.href = '{% url 'burgers' %}'">Cancel</button>
+        {% if burger %}<button class="btn btn-outline-info redBtn" type="button" onclick="deleteJS();">Delete</button>{% endif %}
+      </div>
+    </form>
+  </div>
+  {% if burger %}
+  <script type="text/javascript">
+  function deleteJS() {
+    var confirmed = confirm("Are you sure you want to delete your sale?");
+    if (confirmed) {
+      window.location.href = "{% url 'delBurger' burger.id %}";
+    }
+  }
+  </script>
+  {% endif %}
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "main/base.html.django" %}
+{% block content %}
+<main role="main" class="container">
+  <div class="col-md-4 box-pos">
+    <div class="content-section">
+      <h3>Burgers</h3>
+      <p class='text-muted'>Click the button to create a burger
+        <ul class="list-group">
+          <li class="list-group-item bg-dark">
+            <button type="button" class="btn btn-outline-info" onclick='window.location.href = "{% url "addBurger" %}"'>Create Burger</button>
+          </li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      {% for burger in burgers %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            {% if burger.image %}
+            <img class="mt-1 float-right" height="60" src="{{ burger.image.url }}">
+            {% endif %}
+              <h2><img height="50" class="rounded-circle mr-0" src="{{burger.creator.profile.image.url}}"/> {{burger.creator.username}}</h2>
+            <h2>{{burger.title}} - Price: {{burger.price}}</h2>
+          </div>
+          <p class="article-title">{{burger.info|linebreaks}}</p>
+          <button type="button" class="btn btn-outline-info" onclick='window.location.href = "{% url "displayBurger" burger.id %}"'>More Info</button>
+          {% if editBtn %}<button type="button" class="btn btn-outline-info float-right" onclick='window.location.href = "{% url "editBurger" burger.id %}"'>Edit</button>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+
+    </div>
+  </div>
+</main>
+
+
+{% endblock content %}

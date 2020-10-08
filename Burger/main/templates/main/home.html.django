@@ -1,0 +1,25 @@
+{% extends "main/base.html.django" %}
+{% block content %}
+  <main role="main" class="container">
+    <div class="row" id="winbox">
+      <div class="col-md-8">
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h2>Welcome to Burger website!</h2>
+              <small class="text-muted ml-2">Best burgers</small>
+          </div>
+          <p class="article-title">Click button below to play Minecraft.</p>
+          <button class="btn btn-outline-info" onclick="minecraft()">Right here</button>
+          </div>
+        </article>
+      </div>
+      </div>
+  </main>
+  <script type="text/javascript">
+  function minecraft() {
+    var winbox = document.getElementById("winbox");
+    winbox.innerHTML = '<iframe height="800" width="1600" src="http://classic.minecraft.net"></iframe>';
+  }
+  </script>
+{% endblock content %}

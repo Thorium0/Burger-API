@@ -1,0 +1,147 @@
+body {
+  background: #333;
+  color: #333333;
+  margin-top: 5rem;
+  padding-top: 20px;
+}
+
+h1, h2, h3, h4, h5, h6, legend, label, p, div, br {
+  color: #fff;
+}
+
+ul {
+  margin: 0;
+}
+
+.commentProfile {
+  position:absolute;
+  right:30px;
+  top:10px;
+}
+
+.brLine {
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+.navImg {
+  height: 40px;
+  width: 40px;
+}
+
+.redBtn {
+  color:red;
+  border-color:red;
+}
+
+.redBtn:hover {
+  background-color: red;
+  border-color: red;
+  color:black;
+}
+
+.box-pos {
+  position:fixed;
+  margin-left:65vw;
+  left:0;
+  width: 250px;
+  z-index: 90;
+}
+
+
+.float-right {
+  float: right;
+}
+.bg-steel {
+  background-color: #1a1a1a;
+}
+
+.site-header {
+  position: fixed;
+  z-index: 100;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ccc;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #222;
+  padding: 10px 20px;
+  border: 1px solid #111;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #fff;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #444
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+
+@media only screen and (max-width: 766px) {
+  .box-pos {
+    position:relative;
+    margin-left:0;
+    left:0;
+    width: 100%;
+    z-index: 0;
+  }
+  .brLine {
+    display: none;
+  }
+  .navImg {
+
+    display: none;
+  }
+}
