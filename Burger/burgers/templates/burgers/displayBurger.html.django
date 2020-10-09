@@ -7,9 +7,9 @@
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
-            <h1><img height="50" class="rounded-circle mr-0" src="{{car.seller.profile.image.url}}"/> {{burger.seller.username}}</h2>
+            <h1><img height="50" class="rounded-circle mr-0" src="{{burger.creator.profile.image.url}}"/> {{burger.creator.username}}</h2>
             <h1>{{burger.title}} - Price: {{burger.price}}</h2>
-            <small class="text-muted ml-2">Sale id: {{burger.id}}</small>
+            <small class="text-muted ml-2">Burger id: {{burger.id}}</small>
           </div>
           <p class="article-title">Meats:</p>
           <ul>
@@ -29,6 +29,13 @@
           <ul>
             {% for condiment in condiments %}
               <li>{{condiment|linebreaks}}</li>
+            {% endfor %}
+          </ul>
+          <br/>
+          <p class="article-title">Salads:</p>
+          <ul>
+            {% for salad in salads %}
+              <li>{{salad|linebreaks}}</li>
             {% endfor %}
           </ul>
         </div>

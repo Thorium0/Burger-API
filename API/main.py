@@ -8,8 +8,8 @@ app.config["DEBUG"] = True
 dbPath = "./db/burger.db"
 baseURL = "/api/v1/"
 
-subMenuTables = ["beverage", "burger", "salad"]
-subBurgerTables = ["bun", "condiment", "meat"]
+subMenuTables = ["beverage", "burger"]
+subBurgerTables = ["bun", "condiment", "meat", "salad"]
 hasSubs = ["burger"]
 
 

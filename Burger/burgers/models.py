@@ -7,9 +7,6 @@ import requests
 
 
 
-
-
-
 class CustomBurger(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     price = MoneyField(max_digits=15, decimal_places=2, default_currency='DKK')
@@ -18,31 +15,37 @@ class CustomBurger(models.Model):
     image = models.ImageField(upload_to='burger_pics/', default='default-burger.png')
     creationDate = models.DateTimeField(auto_now=True)
 
-    meatjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/meat-all").json()
-    MEATS = ()
-    for meat in meatjson:
-        MEATS += (meat.get('id'), meat.get('name')),
+    jsonLinks = [
+    "http://localhost:9000/api/v1/menu/burger/meat-all",
+    "http://localhost:9000/api/v1/menu/burger/bun-all",
+    "http://localhost:9000/api/v1/menu/burger/condiment-all",
+    "http://localhost:9000/api/v1/menu/burger/salad-all"
+    ]
 
-    bunjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/bun-all").json()
-    BUNS = ()
-    for bun in bunjson:
-        BUNS += (bun.get('id'), bun.get('name')),
+    for link in range(len(jsonLinks)):
+        partjson = requests.get(url=jsonLinks[link]).json()
+        PARTS = ()
+        for part in partjson:
+            PARTS += (part.get('id'), part.get('name')),
+        if link == 0:
+            meats = MultiSelectField(choices=PARTS)
+        elif link == 1:
+            buns = MultiSelectField(choices=PARTS)
+        elif link == 2:
+            condiments = MultiSelectField(choices=PARTS)
+        elif link == 3:
+            salads = MultiSelectField(choices=PARTS)
+        else:
+            Exception("Indalid index for API part")
 
-    condimentjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/condiment-all").json()
-    CONDIMENTS = ()
-    for condiment in condimentjson:
-        CONDIMENTS += (condiment.get('id'), condiment.get('name')),
 
-
-    meats = MultiSelectField(choices=MEATS)
-    buns = MultiSelectField(choices=BUNS)
-    condiments = MultiSelectField(choices=CONDIMENTS)
 
 
 
 
     def __str__(self):
         return self.title
+
 
     def save(self, **kwargs):
         super().save()

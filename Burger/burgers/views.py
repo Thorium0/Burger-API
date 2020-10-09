@@ -94,21 +94,25 @@ def addBurger(request):
 def displayBurger(request, id):
     burger = CustomBurger.objects.get(id=id)
 
+
+
+
+
+    jsonLinks = [
+    "http://localhost:9000/api/v1/menu/burger/meat-all",
+    "http://localhost:9000/api/v1/menu/burger/bun-all",
+    "http://localhost:9000/api/v1/menu/burger/condiment-all",
+    "http://localhost:9000/api/v1/menu/burger/salad-all"
+    ]
+
+
     try:
-        meatjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/meat-all").json()
-        MEATS = {}
-        for meat in meatjson:
-            MEATS[meat.get('id')] = meat.get('name')
-
-        bunjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/bun-all").json()
-        BUNS = {}
-        for bun in bunjson:
-            BUNS[bun.get('id')] = bun.get('name')
-
-        condimentjson = requests.get(url="http://localhost:9000/api/v1/menu/burger/condiment-all").json()
-        CONDIMENTS = {}
-        for condiment in condimentjson:
-            CONDIMENTS[condiment.get('id')] = condiment.get('name')
+        PARTS = []
+        for link in range(len(jsonLinks)):
+            partjson = requests.get(url=jsonLinks[link]).json()
+            PARTS.append({})
+            for part in partjson:
+                PARTS[link][part.get('id')] = part.get('name')
     except:
         messages.warning(request, "API is offline")
         return redirect('burgers')
@@ -116,15 +120,19 @@ def displayBurger(request, id):
 
     meats = []
     for id in burger.meats:
-        meats.append(MEATS[int(id)])
+        meats.append(PARTS[0][int(id)])
 
     buns = []
     for id in burger.buns:
-        buns.append(BUNS[int(id)])
+        buns.append(PARTS[1][int(id)])
 
     condiments = []
     for id in burger.condiments:
-        condiments.append(CONDIMENTS[int(id)])
+        condiments.append(PARTS[2][int(id)])
+
+    salads = []
+    for id in burger.salads:
+        salads.append(PARTS[3][int(id)])
 
     context = {
     "title": burger.title,
@@ -133,6 +141,7 @@ def displayBurger(request, id):
     "buns": buns,
     "condiments": condiments,
     "meats": meats,
+    "salads": salads,
     "currentUser" : request.user,
     }
     return render(request, 'burgers/displayBurger.html.django', context)
