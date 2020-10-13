@@ -28,7 +28,7 @@ def page_not_found(e):
 
 @app.route('/', methods=['GET'])
 def home():
-    return flask.render_template("index.html.j2", burgerParts=subBurgerTables)
+    return flask.render_template("index.html.j2")
 
 
 @app.route(baseURL+'/menu-all', methods=['GET'])

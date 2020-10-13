@@ -45,7 +45,7 @@ def editBurger(request, id):
             form = CustomBurgerCreationForm(request.POST, request.FILES, instance=burger)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Sale Updated!')
+                messages.success(request, 'Burger updated!')
                 return redirect('burgers')
 
         else:
@@ -74,7 +74,7 @@ def addBurger(request):
 
             try: burger.save()
             except: messages.error(request, "Error")
-            else: messages.success(request, "Sale Created!")
+            else: messages.success(request, "Burger created!")
             return redirect('burgers')
 
     else:
@@ -94,17 +94,12 @@ def addBurger(request):
 def displayBurger(request, id):
     burger = CustomBurger.objects.get(id=id)
 
-
-
-
-
     jsonLinks = [
     "http://localhost:9000/api/v1/menu/burger/meat-all",
     "http://localhost:9000/api/v1/menu/burger/bun-all",
     "http://localhost:9000/api/v1/menu/burger/condiment-all",
     "http://localhost:9000/api/v1/menu/burger/salad-all"
     ]
-
 
     try:
         PARTS = []

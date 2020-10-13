@@ -11,12 +11,15 @@
             <h1>{{burger.title}} - Price: {{burger.price}}</h2>
             <small class="text-muted ml-2">Burger id: {{burger.id}}</small>
           </div>
+          {% if meats %}
           <p class="article-title">Meats:</p>
           <ul>
             {% for meat in meats %}
               <li>{{meat|linebreaks}}</li>
             {% endfor %}
           </ul>
+          {% endif %}
+          {% if buns %}
           <br/>
           <p class="article-title">Buns:</p>
           <ul>
@@ -24,6 +27,8 @@
               <li>{{bun|linebreaks}}</li>
             {% endfor %}
           </ul>
+          {% endif %}
+          {% if condiments %}
           <br/>
           <p class="article-title">Condiments:</p>
           <ul>
@@ -31,6 +36,8 @@
               <li>{{condiment|linebreaks}}</li>
             {% endfor %}
           </ul>
+          {% endif %}
+          {% if salads %}
           <br/>
           <p class="article-title">Salads:</p>
           <ul>
@@ -38,6 +45,7 @@
               <li>{{salad|linebreaks}}</li>
             {% endfor %}
           </ul>
+          {% endif %}
         </div>
         <div>
           <img height="200" src="{{ burger.image.url }}">

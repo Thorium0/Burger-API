@@ -9,8 +9,8 @@
               <h2>Welcome to Burger website!</h2>
               <small class="text-muted ml-2">Best burgers</small>
           </div>
-          <p class="article-title">Click button below to play Minecraft.</p>
-          <button class="btn btn-outline-info" onclick="minecraft()">Right here</button>
+          <p class="article-title">Go to <a href="{% url 'burgers' %}">My Burgers</a> to create a burger.</p>
+          <button class="btn btn-outline-info" onclick="minecraft()">Minecraft?</button>
           </div>
         </article>
       </div>

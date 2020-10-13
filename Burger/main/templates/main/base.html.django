@@ -24,8 +24,7 @@
   <header class="site-header">
   <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
     <div class="container">
-      <img class="nav-item mr-4" height="50" width="50" src="{% static 'main/favicon.png' %}"></img>
-      <a id="brand" class="navbar-brand mr-4" href="{% url 'home' %}">Burger</a>
+      <a id="brand" class="navbar-brand mr-4" href="{% url 'home' %}"><img class="nav-item mr-4" height="40" width="40" src="{% static 'main/favicon.png' %}"></img>Burger</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>

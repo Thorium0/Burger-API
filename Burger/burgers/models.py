@@ -32,9 +32,9 @@ class CustomBurger(models.Model):
         elif link == 1:
             buns = MultiSelectField(choices=PARTS)
         elif link == 2:
-            condiments = MultiSelectField(choices=PARTS)
+            condiments = MultiSelectField(choices=PARTS, blank=True)
         elif link == 3:
-            salads = MultiSelectField(choices=PARTS)
+            salads = MultiSelectField(choices=PARTS, blank=True)
         else:
             Exception("Indalid index for API part")
 
