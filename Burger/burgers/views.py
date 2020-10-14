@@ -70,8 +70,8 @@ def addBurger(request):
         if form.is_valid():
             burger = form.save(commit=False)
             burger.creator = request.user
-            burger.isSold = False
 
+            
             try: burger.save()
             except: messages.error(request, "Error")
             else: messages.success(request, "Burger created!")
