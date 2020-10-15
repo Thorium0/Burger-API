@@ -71,7 +71,7 @@ def addBurger(request):
             burger = form.save(commit=False)
             burger.creator = request.user
 
-            
+
             try: burger.save()
             except: messages.error(request, "Error")
             else: messages.success(request, "Burger created!")

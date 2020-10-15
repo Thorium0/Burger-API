@@ -31,6 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
           <a class="av-item nav-link" href="{% url 'burgers' %}">My Burgers</a>
+          <a class="nav-item nav-link" href="{% url 'spa' %}">SPA</a>
           <a class="nav-item nav-link" href="{% url 'faq' %}">FAQ</a>
           <a class="nav-item nav-link" href="{% url 'about' %}">About us</a>
         </div>

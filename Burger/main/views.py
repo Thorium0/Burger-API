@@ -28,3 +28,10 @@ def about(request):
     "title" : "About us",
     }
     return render(request, 'main/about.html.django', context)
+
+
+def spa(request):
+    context = {
+    "title" : "SPA",
+    }
+    return render(request, 'main/spa.html.django', context)
