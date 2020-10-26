@@ -46,6 +46,15 @@
             {% endfor %}
           </ul>
           {% endif %}
+          {% if cheeses %}
+          <br/>
+          <p class="article-title">Cheeses:</p>
+          <ul>
+            {% for cheese in cheeses %}
+              <li>{{cheese|linebreaks}}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <div>
           <img height="200" src="{{ burger.image.url }}">

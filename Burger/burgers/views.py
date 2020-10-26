@@ -95,10 +95,11 @@ def displayBurger(request, id):
     burger = CustomBurger.objects.get(id=id)
 
     jsonLinks = [
-    "http://localhost:9000/api/v1/menu/burger/meat-all",
-    "http://localhost:9000/api/v1/menu/burger/bun-all",
-    "http://localhost:9000/api/v1/menu/burger/condiment-all",
-    "http://localhost:9000/api/v1/menu/burger/salad-all"
+    "http://localhost:9000/api/v1/menu/burger/meats-all",
+    "http://localhost:9000/api/v1/menu/burger/buns-all",
+    "http://localhost:9000/api/v1/menu/burger/condiments-all",
+    "http://localhost:9000/api/v1/menu/burger/salads-all",
+    "http://localhost:9000/api/v1/menu/burger/cheeses-all"
     ]
 
     try:
@@ -129,6 +130,10 @@ def displayBurger(request, id):
     for id in burger.salads:
         salads.append(PARTS[3][int(id)])
 
+    cheeses = []
+    for id in burger.cheeses:
+        cheeses.append(PARTS[4][int(id)])
+
     context = {
     "title": burger.title,
     "burger": burger,
@@ -137,6 +142,7 @@ def displayBurger(request, id):
     "condiments": condiments,
     "meats": meats,
     "salads": salads,
+    "cheeses": cheeses,
     "currentUser" : request.user,
     }
     return render(request, 'burgers/displayBurger.html.django', context)

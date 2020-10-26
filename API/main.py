@@ -8,8 +8,8 @@ app.config["DEBUG"] = True
 dbPath = "./db/burger.db"
 baseURL = "/api/v1/"
 
-subMenuTables = ["beverage", "burger"]
-subBurgerTables = ["bun", "condiment", "meat", "salad"]
+subMenuTables = ["beverages", "burger"]
+subBurgerTables = ["buns", "condiments", "meats", "salads", "cheeses"]
 hasSubs = ["burger"]
 
 
@@ -96,8 +96,8 @@ def sub_sub_all(table1, table2):
     conn.row_factory = dict_factory
     cur = conn.cursor()
 
-    if table2 == "meat":
-        result = cur.execute("SELECT * FROM meat INNER JOIN meatType ON meatType.id = meat.TypeID;").fetchall()
+    if table2 == "meats":
+        result = cur.execute("SELECT * FROM meats INNER JOIN meatType ON meatType.id = meats.TypeID;").fetchall()
     else:
         result = cur.execute("SELECT * FROM %s;" % table2).fetchall()
     return jsonify(result)

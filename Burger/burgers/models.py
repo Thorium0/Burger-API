@@ -16,10 +16,11 @@ class CustomBurger(models.Model):
     creationDate = models.DateTimeField(auto_now=True)
 
     jsonLinks = [
-    "http://localhost:9000/api/v1/menu/burger/meat-all",
-    "http://localhost:9000/api/v1/menu/burger/bun-all",
-    "http://localhost:9000/api/v1/menu/burger/condiment-all",
-    "http://localhost:9000/api/v1/menu/burger/salad-all"
+    "http://localhost:9000/api/v1/menu/burger/meats-all",
+    "http://localhost:9000/api/v1/menu/burger/buns-all",
+    "http://localhost:9000/api/v1/menu/burger/condiments-all",
+    "http://localhost:9000/api/v1/menu/burger/salads-all",
+    "http://localhost:9000/api/v1/menu/burger/cheeses-all"
     ]
 
     for link in range(len(jsonLinks)):
@@ -35,6 +36,8 @@ class CustomBurger(models.Model):
             condiments = MultiSelectField(choices=PARTS, blank=True)
         elif link == 3:
             salads = MultiSelectField(choices=PARTS, blank=True)
+        elif link == 4:
+            cheeses = MultiSelectField(choices=PARTS, blank=True)
         else:
             Exception("Indalid index for API part")
 
