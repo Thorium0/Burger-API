@@ -8,7 +8,7 @@ app.config["DEBUG"] = True
 dbPath = "./db/burger.db"
 baseURL = "/api/v1/"
 
-subMenuTables = ["beverages", "burger"]
+subMenuTables = ["beverages", "burger", "sides"]
 subBurgerTables = ["buns", "condiments", "meats", "salads", "cheeses"]
 hasSubs = ["burger"]
 
@@ -37,7 +37,10 @@ def menu_all():
     conn.row_factory = dict_factory
     cur = conn.cursor()
     result = cur.execute("SELECT * FROM menu;").fetchall()
-    return jsonify(result)
+
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route(baseURL+'/menu', methods=['GET'])
@@ -52,7 +55,9 @@ def menu_id():
     cur = conn.cursor()
     result = cur.execute("SELECT * FROM menu WHERE id = ?;", id).fetchall()
 
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route(baseURL+'/menu/<table>-all', methods=['GET'])
@@ -62,9 +67,11 @@ def sub_all(table):
     conn = sqlite3.connect(dbPath)
     conn.row_factory = dict_factory
     cur = conn.cursor()
-
     result = cur.execute("SELECT * FROM %s;" % table).fetchall()
-    return jsonify(result)
+
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route(baseURL+'/menu/<table>', methods=['GET'])
@@ -81,7 +88,9 @@ def sub_id(table):
     cur = conn.cursor()
     result = cur.execute("SELECT * FROM %s WHERE id = ?;" % table, id).fetchall()
 
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route(baseURL+'/menu/<table1>/<table2>-all', methods=['GET'])
@@ -100,7 +109,9 @@ def sub_sub_all(table1, table2):
         result = cur.execute("SELECT * FROM meats INNER JOIN meatType ON meatType.id = meats.TypeID;").fetchall()
     else:
         result = cur.execute("SELECT * FROM %s;" % table2).fetchall()
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route(baseURL+'/menu/<table1>/<table2>', methods=['GET'])
@@ -125,7 +136,9 @@ def sub_sub_id(table1, table2):
     else:
         result = cur.execute("SELECT * FROM %s WHERE id = ?;" % table2, id).fetchall()
 
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 if __name__ == '__main__':

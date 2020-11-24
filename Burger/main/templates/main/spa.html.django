@@ -1,6 +1,107 @@
 {% extends "main/base.html.django" %}
 {% block content %}
+<main role="main" class="container">
+  <style>
+    th, td, p, input {
+        font:14px Verdana;
+    }
+    table, th, td
+    {
+        border: solid 1px #DDD;
+        border-collapse: collapse;
+        padding: 2px 3px;
+        text-align: center;
+    }
+    th {
+        font-weight:bold;
+    }
+</style>
+  <div class="row" id="winbox">
+    <div class="col-md-8">
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <h2>All available ingredients!</h2>
+            <small class="text-muted ml-2">Best burgers</small>
+        </div>
+              <label for="burgeringredient">Choose a burger ingredient:</label>
+              <select onChange="updatebox()" name="burgeringredient" id="burger">
+                <option value="beverages" >Beverages</option>
+                <option value="buns" >Buns</option>
+                <option value="cheeses" >Cheeses</option>
+                <option value="condiments" >Condiments</option>
+                <option value="meat" >Meat</option>
+                <option value="salads" >Salads</option>
+                <option value="sides" >Sides</option>
+              </select>
+              <div id="showData">
+              </div>
+        </div>
+      </article>
+    </div>
+    </div>
+</main>
+<script type="text/javascript">
+var dict = {
+  "beverages":"http://localhost:9000/api/v1/menu/beverages-all",
+  "buns":"http://localhost:9000/api/v1/menu/burger/buns-all",
+  "cheeses":"http://localhost:9000/api/v1/menu/burger/cheeses-all",
+  "condiments":"http://localhost:9000/api/v1/menu/burger/condiments-all",
+  "meat":"http://localhost:9000/api/v1/menu/burger/meats-all",
+  "salads":"http://localhost:9000/api/v1/menu/burger/salads-all",
+  "sides":"http://localhost:9000/api/v1/menu/sides-all"
+};
+function updatebox() {
+  var selectbox = document.getElementById("burger");
+  var selectboxvalue = selectbox.value;
+  var selectedlink = dict[selectboxvalue];
+  $.getJSON(selectedlink, function (data) {
+      CreateTableFromJSON(data);
+    });
+}
+function CreateTableFromJSON(data) {
+        // EXTRACT VALUE FOR HTML HEADER.
+        // ('Book ID', 'Book Name', 'Category' and 'Price')
+        var col = [];
+        for (var i = 0; i < data.length; i++) {
+            for (var key in data[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
 
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
 
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < data.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = data[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+  window.onload = function() {
+    updatebox();
+  };
+</script>
 {% endblock content %}
