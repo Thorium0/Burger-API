@@ -21,10 +21,10 @@
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
-            <h2>All available ingredients!</h2>
+            <h2>All tables in database</h2>
             <small class="text-muted ml-2">Best burgers</small>
         </div>
-              <label for="burgeringredient">Choose a burger ingredient:</label>
+              <label for="burgeringredient">Choose a table:</label>
               <select onChange="updatebox()" name="burgeringredient" id="burger">
                 <option value="beverages" >Beverages</option>
                 <option value="buns" >Buns</option>
